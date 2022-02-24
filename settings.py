@@ -1,5 +1,9 @@
+
 import json
+from kivy.lang import Builder
 from path_fixer import PathFixer
+
+Builder.load_file("settings.kv")
 
 class Settings():
     """App setting's class"""

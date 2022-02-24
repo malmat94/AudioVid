@@ -1,7 +1,11 @@
+from kivy.lang import Builder
 from pydub import AudioSegment
 from path_fixer import PathFixer
 from pydub.utils import mediainfo
 import os
+
+Builder.load_file("audio_editor.kv")
+
 
 class AudioEditor():
     """Class for editing audio files"""

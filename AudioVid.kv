@@ -1,11 +1,65 @@
-MainWidget:
+#:import settings settings
+#:import audio_editor audio_editor
+#:import downloader_n_extractor downloader_n_extractor
+#:import navigation_screen_manager navigation_screen_manager
 
-<MainWidget>:
+MyScreenManager:
 
-    Label:
-        text:"Witam w programie AudioVid"
-        size: "100dp", "80dp"
-        pos: "350dp", "600dp"
-    Button:
-        pos: "300dp", "300dp"
-        text: "elo"
+<MyScreenManager@NavigationScreenManager>:
+
+    Screen:
+        name: "Main menu"
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "AudioVid v0.1"
+                size_hint: 1, 0.5
+            Button:
+                text: "Video"
+                on_press: root.push("Video")
+            Button:
+                text: "Audio"
+                on_press: root.push("Audio")
+            Button:
+                text: "Ustawienia"
+                on_press: root.push("Ustawienia")
+
+
+    Screen:
+        name: "Video"
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "AudioVid v0.1"
+                size_hint: 1, None
+                height: "60dp"
+            Label:
+                text: "Video"
+                size_hint: 1, None
+                height: "60dp"
+            Button:
+                text: "Main menu"
+                on_press: root.transition.direction = "right" ; root.current = "Main menu"
+
+    Screen:
+        name: "Audio"
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "AudioVid v0.1"
+            Label:
+                text: "Audio"
+            Button:
+                text: "Main menu"
+                on_press: root.transition.direction = "right" ; root.current = "Main menu"
+
+    Screen:
+        name: "Ustawienia"
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "AudioVid v0.1"
+                text: "Ustawienia"
+            Button:
+                text: "Main menu"
+                on_press: root.transition.direction = "right" ; root.current = "Main menu"

@@ -1,8 +1,10 @@
+from kivy.lang import Builder
 from pytube import YouTube
 from path_fixer import PathFixer
 import moviepy.editor as mp
 import json
 
+Builder.load_file("downloader_n_extractor.kv")
 
 class Downloader():
 
