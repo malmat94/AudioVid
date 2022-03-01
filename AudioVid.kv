@@ -2,10 +2,11 @@
 #:import audio_editor audio_editor
 #:import downloader_n_extractor downloader_n_extractor
 #:import navigation_screen_manager navigation_screen_manager
+#:import box_layout_with_action_bar box_layout_with_action_bar
 
 MyScreenManager:
 
-<MyScreenManager@NavigationScreenManager>:
+<MyScreenManager>:
 
     Screen:
         name: "Main menu"
@@ -27,8 +28,15 @@ MyScreenManager:
 
     Screen:
         name: "Video"
-        BoxLayout:
-            orientation: "vertical"
+        BoxLayoutWithActionBar:
+            title: "Video"
+        # BoxLayout:
+            # orientation: "vertical"
+            # ActionBar:
+                # ActionView:
+                    # ActionPrevious:
+                        # title: "Video"
+                        # on_release: root.transition.direction = "right" ; root.current = "Main menu"
             Label:
                 text: "AudioVid v0.1"
                 size_hint: 1, None
@@ -45,10 +53,19 @@ MyScreenManager:
         name: "Audio"
         BoxLayout:
             orientation: "vertical"
+            ActionBar:
+                ActionView:
+                    ActionPrevious:
+                        title: "Audio"
+                        on_release: root.transition.direction = "right" ; root.current = "Main menu"
             Label:
                 text: "AudioVid v0.1"
+                size_hint: 1, None
+                height: "60dp"
             Label:
                 text: "Audio"
+                size_hint: 1, None
+                height: "60dp"
             Button:
                 text: "Main menu"
                 on_press: root.transition.direction = "right" ; root.current = "Main menu"
@@ -57,9 +74,19 @@ MyScreenManager:
         name: "Ustawienia"
         BoxLayout:
             orientation: "vertical"
+            ActionBar:
+                ActionView:
+                    ActionPrevious:
+                        title: "Ustawienia"
+                        on_release: root.transition.direction = "right" ; root.current = "Main menu"
             Label:
                 text: "AudioVid v0.1"
+                size_hint: 1, None
+                height: "60dp"
+            Label:
                 text: "Ustawienia"
+                size_hint: 1, None
+                height: "60dp"
             Button:
                 text: "Main menu"
                 on_press: root.transition.direction = "right" ; root.current = "Main menu"

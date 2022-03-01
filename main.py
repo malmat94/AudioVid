@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
@@ -15,7 +16,10 @@ class MainWidget(Widget):
 
 
 class AudioVidApp(App):
-    pass
+    manager = ObjectProperty(None)
+    def build(self):
+        self.manager = MyScreenManager()
+        return self.manager
 
 
 AudioVidApp().run()
