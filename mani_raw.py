@@ -2,44 +2,37 @@ from settings import Settings
 from audio_editor import AudioEditor
 from downloader_n_extractor import Downloader, Extractor
 import json
+import os
+print("Witamy w programie AudioVid")
 
 while True:
-    print("Witamy w programie AudioVid")
     print("")
     print("Menu główne:")
 
     print("""  1. Pobierz film z YouTube
   2. Wygeneruj plik audio z pliku video
-  3. Edytuj plik audio
-  4. Ustawienia""")
+  3. Przytnij plik audio
+  4. Ustawienia
+  ENTER - zamknij program""")
     print("")
-    main_action = input("      Wybór: ")
+    main_action = input("Wybór: ")
 
     if main_action == "1":
 
-        while True:
+        print("")
+        link = input("Podaj link do filmu: ")
+        settings_file = "settings.json"
+        with open(settings_file) as sf:
+            path = json.load(sf)
 
-            link = input("Podaj link do filmu: ")
-            settings_file = "settings.json"
-            with open(settings_file) as sf:
-                path = json.load(sf)
+        download = Downloader(link, path)
+        download.yt_downloader()
+        dwn_vid_path = os.path.abspath(download.vid_path)
 
-            download = Downloader(link, path)
-            download.yt_downloader()
-
-            acc_1 = input("Ściągamy dalej? (t/n): ")
-
-            if acc_1 == "t":
-                link = input("Podaj link do filmu: ")
-                settings_file = "settings.json"
-                with open(settings_file) as sf:
-                    path = json.load(sf)
-
-                download = Downloader(link, path)
-                download.yt_downloader()
-
-            else:
-                break
+        print("")
+        print("GOTOWE!")
+        print("Plik znajduje się w: " + dwn_vid_path)
+        print("")
 
     elif main_action == "2":
 
@@ -51,11 +44,21 @@ while True:
     elif main_action == "3":
 
         audio_path = input("Podaj lokalizację pliku audio: ")
-        cut_start = input("Podaj początkowy czas przycięcia (min:sec): ")
-        cut_ending = input("Podaj końcowy czas przycięcia (min:sec): ")
-
         cutter = AudioEditor(audio_path)
+        print("")
+        print("Długośc pliku audio wynosi: " + str(cutter.audio_length) + "s")
+        print("")
+        cut_start = input("Podaj początkowy czas przycięcia (np. 01:00) : ")
+        cut_ending = input("Podaj końcowy czas przycięcia (np. 02:00): ")
+
         cutter.audio_cutter(cut_start, cut_ending)
+        edt_aud_path = os.path.abspath(cutter.afc_path)
+
+        print("")
+        print("GOTOWE!")
+        print("Plik znajduje się w: " + edt_aud_path)
+        print("")
+
 
     elif main_action == "4":
 
@@ -67,5 +70,5 @@ while True:
     elif main_action == "":
         break
 
-close = input("Wcisnij Enter żeby zaknąć program")
+close = input("Wcisnij Enter żeby potwierdzić zamknięcie programu")
 

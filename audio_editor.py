@@ -12,9 +12,12 @@ class AudioEditor():
 
     def __init__(self, audio_path):
 
+
         self.audio_path = audio_path
         self.path_fixer = PathFixer(audio_path)
         self.fixed_audio_path = self.path_fixer.path_converter()
+        self.audio_length = AudioSegment.from_file(self.fixed_audio_path, format="mp3").duration_seconds
+        self.afc_path = ""
 
     def audio_cutter(self, first_cut_point, last_cut_point):
         """Function for cuting audio files"""
@@ -23,9 +26,11 @@ class AudioEditor():
 
         cut_points = self._start_ending_converter(first_cut_point, last_cut_point)
         audio_file_cut = audio_file[cut_points[0]:cut_points[1]]
-        afc_path = self._mp3_eddited_tagger_("(cut)") #giving directory to edited (cut) audio file
+        self.afc_path = self._mp3_eddited_tagger_("(cut)") #giving directory to edited (cut) audio file
 
-        audio_file_cut.export(afc_path)
+        audio_file_cut.export(self.afc_path)
+
+        return self.afc_path
 
     def audio_volume_editor(self, amount):
         """Function for editing volume of audio files"""
